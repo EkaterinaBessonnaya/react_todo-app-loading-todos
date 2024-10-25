@@ -8,11 +8,8 @@ import { Todo } from './types/Todo';
 import { Status } from './types/Status';
 import cn from 'classnames';
 
-// ... other imports
-
 export const App: React.FC = () => {
   const [todos, setTodos] = useState<Todo[]>([]);
-  const [filteredTodos, setFilteredTodos] = useState<Todo[]>(todos);
   const [filterStatus, setFilterStatus] = useState<Status>(Status.All);
   const [errorMessage, setErrorMessage] = useState('');
 
@@ -36,9 +33,7 @@ export const App: React.FC = () => {
     }
   }, [todos, filterStatus]);
 
-  useEffect(() => {
-    setFilteredTodos(filterTodosByStatus());
-  }, [filterTodosByStatus]); // Note: Only `filterTodosByStatus` is in dependencies
+  const filteredTodos = filterTodosByStatus();
 
   return (
     <div className="todoapp">
